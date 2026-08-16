@@ -1,0 +1,14 @@
+Command: pnpm test
+Result: exit code 1
+
+ RUN  v3.2.7 /home/ubuntu/nuxt4-debug-lab-work/nuxt-use-async-data-refresh-lab
+ ❯ tests/visible-users.test.ts (3 tests | 1 failed)
+   ✓ 一覧画面の更新追従 > 第01章: 再取得結果はデータソースに反映される
+   × 一覧画面の更新追従 > 第01章: 利用者が見る一覧も再取得結果へ更新される
+     → expected [ 'Ada' ] to deeply equal [ 'Grace' ]
+   ✓ 一覧画面の更新追従 > 第01章: computedで導出した一覧はデータソースの更新に追従する
+
+Observed fact:
+- 再取得後、データソースは`Grace`を持つ。
+- 初期化時に別Refへコピーした表示一覧は`Ada`のまま。
+- 同じデータソースから`computed`で導出した一覧は`Grace`へ更新される。
