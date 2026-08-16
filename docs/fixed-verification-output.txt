@@ -1,0 +1,19 @@
+Commands and results after the minimal fix
+
+1. pnpm test
+   Result: exit code 0
+   Test Files  1 passed (1)
+   Tests  3 passed (3)
+
+2. pnpm typecheck
+   Result: exit code 0
+   Type check passed.
+
+3. pnpm build
+   Result: exit code 0
+   Nuxt Nitro server built.
+   Build complete.
+
+4. Browser manual observation
+   /fixed initial: useAsyncData.data = Ada, visibleUsers = Ada
+   /fixed after refresh: useAsyncData.data = Grace, visibleUsers = Grace

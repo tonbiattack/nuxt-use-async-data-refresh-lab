@@ -9,12 +9,11 @@ type User = {
 const initialUsers: User[] = [{ id: 'user-001', name: 'Ada' }]
 const refreshedUsers: User[] = [{ id: 'user-002', name: 'Grace' }]
 
-function createBuggyScreenModel() {
+function createScreenModel() {
   const asyncDataUsers = ref<User[]>(initialUsers)
 
-  // Nuxt画面の `useState(() => data.value?.users ?? [])` と同じく、
-  // 初期化時点の配列を別の状態として保持する。
-  const visibleUsers = ref(asyncDataUsers.value)
+  // `useAsyncData`のdataを複製せず、表示用の値として導出する。
+  const visibleUsers = computed(() => asyncDataUsers.value)
 
   function applyRefreshResult() {
     asyncDataUsers.value = refreshedUsers
@@ -29,7 +28,7 @@ function createBuggyScreenModel() {
 
 describe('一覧画面の更新追従', () => {
   it('第01章: 再取得結果はデータソースに反映される', () => {
-    const screen = createBuggyScreenModel()
+    const screen = createScreenModel()
 
     screen.applyRefreshResult()
 
@@ -37,7 +36,7 @@ describe('一覧画面の更新追従', () => {
   })
 
   it('第01章: 利用者が見る一覧も再取得結果へ更新される', () => {
-    const screen = createBuggyScreenModel()
+    const screen = createScreenModel()
 
     screen.applyRefreshResult()
 
